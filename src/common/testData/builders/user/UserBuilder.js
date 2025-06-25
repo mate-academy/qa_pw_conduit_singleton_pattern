@@ -48,7 +48,8 @@ export class UserBuilder extends BaseBuilder {
   }
 
   generateEmail() {
-    const email = `${this.username}_${faker.internet.email()}`.toLowerCase();
+    const email =
+      `${this.product.username}_${faker.internet.email()}`.toLowerCase();
 
     return email;
   }
