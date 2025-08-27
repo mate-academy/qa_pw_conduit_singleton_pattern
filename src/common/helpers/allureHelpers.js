@@ -15,7 +15,7 @@ export function parseTestTreeHierarchy(fileName, logger) {
     attributes = attributes.slice(0, 2);
   }
 
-  //logger.debug(`Parsed test hierarchy: ${JSON.stringify(attributes)}`);
+  logger.debug(`Parsed test hierarchy: ${JSON.stringify(attributes)}`);
 
   return attributes;
 }
