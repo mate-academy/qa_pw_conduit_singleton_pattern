@@ -1,5 +1,5 @@
 export class Logger {
-  static #instanceLogger;
+  static #instance;
   #currentLevel;
 
   constructor(level = 'info') {
@@ -7,13 +7,12 @@ export class Logger {
     this.#currentLevel = level;
   }
 
-  static getInstanceLogger(level = 'info') {
-    if(!Logger.#instanceLogger) {
+  static getInstance(level = 'error') {
+    if(!Logger.#instance) {
       const logger = new Logger(level)
-      Logger.#instanceLogger = logger;
-      console.log('New Logger instance created')
+      Logger.#instance = logger;
     }
-    return Logger.#instanceLogger;
+    return Logger.#instance;
   }
 
   shouldLog(level) {
@@ -41,10 +40,6 @@ export class Logger {
   }
   error(message) {
     this.log('error', message);
-  }
-
-  static getInstance() {
-    return Logger.#instanceLogger;
   }
 
   getCurrentLevel() {
