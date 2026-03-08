@@ -3,7 +3,7 @@ import { Logger } from '../../src/common/logger/Logger';
 import * as allure from 'allure-js-commons';
 import { parseTestTreeHierarchy } from '../../src/common/helpers/allureHelpers';
 
-export const test = base.extend<
+export const test = base.extend
   {
     usersNumber;
     contextsNumber;
@@ -18,7 +18,7 @@ export const test = base.extend<
   contextsNumber: [1, { option: true }],
   logger: [
     async ({}, use) => {
-      const logger = new Logger(process.env.LOG_LEVEL);
+      const logger = Logger.getInstance(process.env.LOG_LEVEL);
 
       await use(logger);
     },
