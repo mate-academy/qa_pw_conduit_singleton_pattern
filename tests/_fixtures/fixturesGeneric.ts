@@ -12,18 +12,14 @@ export const test = base.extend<
   },
   {
     logger;
+    getInstance;
   }
 >({
   usersNumber: [1, { option: true }],
   contextsNumber: [1, { option: true }],
-  logger: [
-    async ({}, use) => {
-      const logger = new Logger(process.env.LOG_LEVEL);
-
-      await use(logger);
-    },
-    { scope: 'worker' },
-  ],
+  logger: async ({}, use) => {
+    await use(Logger.getInstance('error'));
+  },
   infoTestLog: [
     async ({ logger }, use, testInfo) => {
       const indexOfTestSubfolderStart = testInfo.file.indexOf('/tests') + 7;
@@ -56,4 +52,6 @@ export const test = base.extend<
     },
     { scope: 'test', auto: true },
   ],
+
+  
 });
