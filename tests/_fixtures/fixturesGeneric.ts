@@ -18,7 +18,7 @@ export const test = base.extend<
   contextsNumber: [1, { option: true }],
   logger: [
     async ({}, use) => {
-      const logger = new Logger(process.env.LOG_LEVEL);
+      const logger = Logger.getInstance(process.env.LOG_LEVEL);
 
       await use(logger);
     },
@@ -26,8 +26,9 @@ export const test = base.extend<
   ],
   infoTestLog: [
     async ({ logger }, use, testInfo) => {
-      const indexOfTestSubfolderStart = testInfo.file.indexOf('/tests') + 7;
-      const fileName = testInfo.file.substring(indexOfTestSubfolderStart);
+      const filePath = testInfo.file.replaceAll('\\', '/');
+      const indexOfTestSubfolderStart = filePath.indexOf('/tests') + 7;
+      const fileName = filePath.substring(indexOfTestSubfolderStart);
 
       logger.info(`Test started: ${fileName}`);
 
