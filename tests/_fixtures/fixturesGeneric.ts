@@ -5,20 +5,20 @@ import { parseTestTreeHierarchy } from '../../src/common/helpers/allureHelpers';
 
 export const test = base.extend<
   {
-    usersNumber;
-    contextsNumber;
-    infoTestLog;
-    addAllureTestHierarchy;
+    usersNumber: number;
+    contextsNumber: number;
+    infoTestLog: string;
+    addAllureTestHierarchy: string;
   },
   {
-    logger;
+    logger: Logger;
   }
 >({
   usersNumber: [1, { option: true }],
   contextsNumber: [1, { option: true }],
   logger: [
     async ({}, use) => {
-      const logger = new Logger(process.env.LOG_LEVEL);
+      const logger = Logger.getInstance(process.env.LOG_LEVEL);
 
       await use(logger);
     },
@@ -52,7 +52,7 @@ export const test = base.extend<
         await allure.subSuite(subSuite);
       }
 
-      await use('addAllureTestHierarhy');
+      await use('addAllureTestHierarchy');
     },
     { scope: 'test', auto: true },
   ],
